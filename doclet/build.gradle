@@ -13,7 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -34,4 +37,15 @@ jar {
 dependencies {
     runtimeOnly group: 'junit', name: 'junit', version: '4.12'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.twosigma'
+            artifactId 'beakerx-doclet'
+            version "$beakerxVersion"
+            from components.java
+        }
+    }
 }

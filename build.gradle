@@ -19,6 +19,7 @@ subprojects {
    
    tasks.withType(JavaCompile) { // Instead of compileJava
       options.encoding = "UTF-8"
+      options.compilerArgs += ["-nowarn", "-XDenableSunApiLintControl"]
    }
 
    java {
@@ -26,12 +27,9 @@ subprojects {
       targetCompatibility = JavaVersion.VERSION_17
    }
 
-   tasks.register('install') { // Instead of install, new Task Configuration API.
+   tasks.register('install') { 
       dependsOn 'build'
       dependsOn 'publishToMavenLocal'
    }
-}
 
-tasks.withType(JavaCompile) {
-   options.warnings = false
 }
