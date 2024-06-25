@@ -14,9 +14,13 @@
  *  limitations under the License.
  */
 
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    runtimeOnly group: 'junit', name: 'junit', version: '4.12'
 }
 
 
