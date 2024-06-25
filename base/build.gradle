@@ -84,6 +84,7 @@ compileJava {
 }
 
 task jvmInspectJavaDoc(type: Javadoc, dependsOn: compileJava) {
+    dependsOn('compileJava')
     source = sourceSets.main.allJava
     classpath += configurations.compileClasspath
     options.doclet = "com.twosigma.beakerx.doclet.BeakerxDoclet"
@@ -100,3 +101,6 @@ task moveInspectJson(type: Copy, dependsOn: jvmInspectJavaDoc) {
     from("beakerx_inspect.json")
     into("build/resources/main")
 }
+
+jvmInspectJavaDoc.finalizedBy moveInspectJson
+compileJava.finalizedBy jvmInspectJavaDoc
