@@ -102,5 +102,6 @@ task moveInspectJson(type: Copy, dependsOn: jvmInspectJavaDoc) {
     into("build/resources/main")
 }
 
+jar.dependsOn moveInspectJson
 jvmInspectJavaDoc.finalizedBy moveInspectJson
 compileJava.finalizedBy jvmInspectJavaDoc
