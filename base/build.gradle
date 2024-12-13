@@ -92,7 +92,7 @@ task jvmInspectJavaDoc(type: Javadoc, dependsOn: compileJava) {
             configurations.compileClasspath.find { it.name.startsWith("doclet-") },
             sourceSets.main.compileClasspath
     ).getFiles().toList()
-    
+
     options.addStringOption("subpackages", "com.twosigma.beakerx")
     options.addStringOption("sourcepath", "../base/src/main/java")
 }
@@ -102,6 +102,7 @@ task moveInspectJson(type: Copy, dependsOn: jvmInspectJavaDoc) {
     into("build/resources/main")
 }
 
+compileTestJava.dependsOn moveInspectJson
 jar.dependsOn moveInspectJson
 jvmInspectJavaDoc.finalizedBy moveInspectJson
 compileJava.finalizedBy jvmInspectJavaDoc
