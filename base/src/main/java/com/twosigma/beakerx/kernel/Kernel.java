@@ -56,7 +56,8 @@ public abstract class Kernel implements KernelFunctionality {
   private static final Logger logger = LoggerFactory.getLogger(Kernel.class);
 
   private static String OS = System.getProperty("os.name").toLowerCase();
-  public static boolean showNullExecutionResult = true;
+  public static boolean showNullExecutionResult = "true".equalsIgnoreCase(
+      System.getenv("BEAKERX_SHOW_NULL_EXECUTION_RESULT"));
   private final CloseKernelAction closeKernelAction;
 
   private String sessionId;
