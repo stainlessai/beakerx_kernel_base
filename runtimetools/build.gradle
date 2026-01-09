@@ -27,7 +27,7 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId 'com.twosigma'
+            groupId project.groupId
             artifactId 'beakerx-runtimetools'
             version "$beakerxVersion"
             from components.java
