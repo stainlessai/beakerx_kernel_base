@@ -16,6 +16,7 @@
 
 package com.twosigma.beakerx.jvm.object;
 
+import com.twosigma.beakerx.kernel.Kernel;
 import com.twosigma.beakerx.kernel.KernelManager;
 import com.twosigma.beakerx.KernelTest;
 import com.twosigma.beakerx.KernelTestFactory;
@@ -32,15 +33,19 @@ public class SimpleLayoutManagerTest {
 
 
   private KernelTest kernel;
+  private boolean originalShowNullExecutionResult;
 
   @Before
   public void setUp() throws Exception {
+    originalShowNullExecutionResult = Kernel.showNullExecutionResult;
+    Kernel.showNullExecutionResult = true;
     kernel = KernelTestFactory.getKernel();
     KernelManager.register(kernel);
   }
 
   @After
   public void tearDown() throws Exception {
+    Kernel.showNullExecutionResult = originalShowNullExecutionResult;
     KernelManager.register(null);
   }
 

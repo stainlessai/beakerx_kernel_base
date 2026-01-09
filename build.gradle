@@ -12,9 +12,6 @@ allprojects {
 }
 
 subprojects {
-   ext {
-      beakerxVersion = "2.1-SNAPSHOT"
-   }
    apply plugin: 'java'
    
    tasks.withType(JavaCompile) { // Instead of compileJava

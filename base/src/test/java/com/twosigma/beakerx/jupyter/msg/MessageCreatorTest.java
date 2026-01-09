@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.jupyter.msg;
 
 import com.twosigma.beakerx.KernelTestFactory;
+import com.twosigma.beakerx.kernel.Kernel;
 import com.twosigma.beakerx.kernel.SocketEnum;
 import com.twosigma.beakerx.jvm.object.SimpleEvaluationObject;
 import com.twosigma.beakerx.KernelTest;
@@ -24,6 +25,7 @@ import com.twosigma.beakerx.kernel.msg.JupyterMessages;
 import com.twosigma.beakerx.kernel.msg.MessageCreator;
 import com.twosigma.beakerx.kernel.msg.MessageHolder;
 import com.twosigma.beakerx.widget.TestWidgetUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import com.twosigma.beakerx.message.Message;
@@ -40,11 +42,19 @@ public class MessageCreatorTest {
 
   private SimpleEvaluationObject seo;
   KernelTest kernel;
+  private boolean originalShowNullExecutionResult;
 
   @Before
   public void setUp() throws Exception {
+    originalShowNullExecutionResult = Kernel.showNullExecutionResult;
+    Kernel.showNullExecutionResult = true;
     kernel = KernelTestFactory.getKernel();
     seo = new SimpleEvaluationObject("code", new KernelTest.SeoConfigurationFactoryMock(kernel,commMsg(),MessageCreator.get(),new MagicCommandConfigurationMock()));
+  }
+
+  @After
+  public void tearDown() {
+    Kernel.showNullExecutionResult = originalShowNullExecutionResult;
   }
 
   @Test

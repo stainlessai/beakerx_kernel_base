@@ -19,7 +19,7 @@ publishing {
         maven(MavenPublication) {
             groupId project.groupId
             artifactId 'beakerx-kernel-base-test'
-            version "$beakerxVersion"
+            version project.version
             from components.java
         }
     }
