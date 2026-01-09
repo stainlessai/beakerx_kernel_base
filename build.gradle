@@ -2,8 +2,15 @@ wrapper {
    gradleVersion = '8.1.1'
 }
 
+// Set version on all projects from command line or gradle.properties
+def projectVersion = findProperty('version')
+if (projectVersion == null) {
+   throw new GradleException("Version not specified. Use -Pversion=<version> or set version in gradle.properties")
+}
+
 allprojects {
    apply plugin: 'java'
+   version = projectVersion
 
    repositories {
       mavenCentral() // Instead of jcenter() as it is deprecated in Gradle 7
