@@ -135,7 +135,7 @@ public class BeakerCellExecutor implements CellExecutor {
     } catch (InterruptedException ex) {
     }
     if (!thr.getState().equals(State.TERMINATED)) {
-      thr.stop();
+      System.err.println("Thread " + thr.getName() + " did not terminate after interrupt, skipping Thread.stop()");
     }
   }
 
