@@ -19,12 +19,14 @@ import static com.twosigma.beakerx.kernel.Utils.timestamp;
 import static com.twosigma.beakerx.kernel.Utils.uuid;
 import static com.twosigma.beakerx.util.Preconditions.checkNotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.twosigma.beakerx.kernel.Utils;
 import com.twosigma.beakerx.kernel.msg.JupyterMessages;
 import com.twosigma.beakerx.util.Preconditions;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({ "id", "username", "session", "date", "type", "version" })
 public class Header {
 
