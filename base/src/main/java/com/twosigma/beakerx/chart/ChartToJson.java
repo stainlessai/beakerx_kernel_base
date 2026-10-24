@@ -45,6 +45,7 @@ import static com.twosigma.beakerx.chart.serializer.XYChartSerializer.CONSTANT_L
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.twosigma.beakerx.chart.categoryplot.CategoryPlot;
 import com.twosigma.beakerx.chart.categoryplot.plotitem.CategoryArea;
@@ -146,7 +147,7 @@ public class ChartToJson {
     SimpleModule module = new SimpleModule("ChartSerializer", new Version(1, 0, 0, null));
     serializerMap.forEach(module::addSerializer);
 
-    mapper = new ObjectMapper();
+    mapper = MessageSerializer.createObjectMapper();
     mapper.registerModule(module);
   }
 

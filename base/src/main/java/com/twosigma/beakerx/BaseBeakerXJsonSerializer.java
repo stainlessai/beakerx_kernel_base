@@ -17,6 +17,7 @@ package com.twosigma.beakerx;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.jvm.serialization.BeakerObjectConverter;
 import com.twosigma.beakerx.table.TableDisplayToJson;
 
@@ -31,9 +32,10 @@ public abstract class BaseBeakerXJsonSerializer implements BeakerXJsonSerializer
   private final BeakerObjectConverter serializer;
 
   public BaseBeakerXJsonSerializer() {
-    this.objectMapper = new ObjectMapper();
+    this.objectMapper = MessageSerializer.createObjectMapper();
     this.objectMapper.enable(WRITE_ENUMS_USING_TO_STRING);
     this.objectMapper.registerModule(new TableDisplayToJson().tableDisplayModule());
+    this.objectMapper.findAndRegisterModules();
     this.serializer = createSerializer();
   }
 

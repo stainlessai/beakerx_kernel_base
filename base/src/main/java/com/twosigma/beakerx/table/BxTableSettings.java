@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.table;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.twosigma.beakerx.table.serializer.TableSettings;
 
@@ -40,7 +41,7 @@ public class BxTableSettings implements TableSettings {
   public BxTableSettings(String path, TableSettingsDefaults defaults) {
     this.path = path;
     this.defaults = defaults;
-    this.objectMapper = new ObjectMapper();
+    this.objectMapper = MessageSerializer.createObjectMapper();
     this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
   }
 

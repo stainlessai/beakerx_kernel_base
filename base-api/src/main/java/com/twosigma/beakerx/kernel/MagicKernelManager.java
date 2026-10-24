@@ -17,6 +17,7 @@ package com.twosigma.beakerx.kernel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.message.Header;
 import com.twosigma.beakerx.message.Message;
 import org.apache.commons.codec.binary.Base64;
@@ -139,7 +140,7 @@ public class MagicKernelManager {
   }
 
   private Message parseMessage(String stringJson) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = MessageSerializer.createObjectMapper();
     JsonNode json = mapper.readTree(stringJson);
     Message msg = new Message(mapper.convertValue(json.get("header"), Header.class));
     msg.setContent(mapper.convertValue(json.get("content"), Map.class));
@@ -157,7 +158,7 @@ public class MagicKernelManager {
     } catch (NoSuchKernelException e) {
       return messages;
     }
-    pep.sendMessage(new ObjectMapper().valueToTree(message).toString());
+    pep.sendMessage(MessageSerializer.createObjectMapper().valueToTree(message).toString());
 
     try {
       messages = getIopubMessages();

@@ -17,6 +17,7 @@ package com.twosigma.beakerx.kernel.magic.command.functionality.kernelMagic;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.kernel.KernelFunctionality;
 import com.twosigma.beakerx.kernel.NoSuchKernelException;
 import com.twosigma.beakerx.kernel.PythonEntryPoint;
@@ -94,7 +95,7 @@ public class KernelMagicCommand implements MagicCommandFunctionality {
   }
 
   private Message parseMessage(String stringJson) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = MessageSerializer.createObjectMapper();
     JsonNode json = mapper.readTree(stringJson);
     Message msg = new Message(mapper.convertValue(json.get("header"), Header.class));
     msg.setContent(mapper.convertValue(json.get("content"), Map.class));

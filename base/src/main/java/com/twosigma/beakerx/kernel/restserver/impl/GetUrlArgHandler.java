@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.kernel.restserver.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.BeakerXClient;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class GetUrlArgHandler {
 
   public GetUrlArgHandler(BeakerXClient beakerXClient) {
     this.beakerXClient = beakerXClient;
-    objectMapper = new ObjectMapper();
+    objectMapper = MessageSerializer.createObjectMapper();
   }
 
   public void handle(String data) {

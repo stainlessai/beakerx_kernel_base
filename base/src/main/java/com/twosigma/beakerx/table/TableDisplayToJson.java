@@ -18,6 +18,7 @@ package com.twosigma.beakerx.table;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.twosigma.beakerx.chart.Color;
 import com.twosigma.beakerx.chart.serializer.ColorSerializer;
@@ -90,7 +91,8 @@ public class TableDisplayToJson {
   public TableDisplayToJson(TableSettings settings) {
     this.settings = settings;
     SimpleModule module = tableDisplayModule();
-    mapper = new ObjectMapper();
+    mapper = MessageSerializer.createObjectMapper();
+    mapper.findAndRegisterModules();
     mapper.enable(WRITE_ENUMS_USING_TO_STRING);
     mapper.registerModule(module);
   }

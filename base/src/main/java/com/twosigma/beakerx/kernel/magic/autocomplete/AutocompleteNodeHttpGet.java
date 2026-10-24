@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.kernel.magic.autocomplete;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.autocomplete.AutocompleteNode;
 import com.twosigma.beakerx.autocomplete.AutocompleteResult;
 import org.apache.http.client.fluent.Request;
@@ -39,7 +40,7 @@ public class AutocompleteNodeHttpGet extends AutocompleteNode {
 
   public AutocompleteNodeHttpGet(String name, List<AutocompleteNode> children) {
     super(name, children);
-    this.objectMapper = new ObjectMapper();
+    this.objectMapper = MessageSerializer.createObjectMapper();
     this.objectMapper.enable(WRITE_ENUMS_USING_TO_STRING);
   }
 

@@ -25,11 +25,18 @@ public class MessageSerializer {
 
   static {
     mapper = new ObjectMapper();
+    mapper.findAndRegisterModules();
     mapper.disable(SerializationFeature.INDENT_OUTPUT);
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
   }
 
   private MessageSerializer() {
+  }
+
+  public static ObjectMapper createObjectMapper() {
+    ObjectMapper om = new ObjectMapper();
+    om.findAndRegisterModules();
+    return om;
   }
 
   public static <T> T parse(String json, Class<T> theClass) {

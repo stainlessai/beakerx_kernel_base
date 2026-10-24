@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.kernel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
@@ -42,7 +43,7 @@ public class BeakerXJsonConfig implements BeakerXJson {
 
   public BeakerXJsonConfig(Path path) {
     this.path = path;
-    this.objectMapper = new ObjectMapper();
+    this.objectMapper = MessageSerializer.createObjectMapper();
     this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
   }
 

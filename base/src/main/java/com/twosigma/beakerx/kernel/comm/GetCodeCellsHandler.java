@@ -16,6 +16,7 @@
 package com.twosigma.beakerx.kernel.comm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twosigma.beakerx.message.MessageSerializer;
 import com.twosigma.beakerx.BeakerXClientManager;
 import com.twosigma.beakerx.CodeCell;
 
@@ -30,7 +31,7 @@ public class GetCodeCellsHandler {
   private ObjectMapper objectMapper;
 
   private GetCodeCellsHandler() {
-    objectMapper = new ObjectMapper();
+    objectMapper = MessageSerializer.createObjectMapper();
   }
 
   public void handle(String data) {
