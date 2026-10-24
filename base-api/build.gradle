@@ -23,7 +23,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
-            groupId 'com.twosigma'
+            groupId 'ai.stainless'
             artifactId 'beakerx-kernel-base-api'
             version "$beakerxVersion"
         }
