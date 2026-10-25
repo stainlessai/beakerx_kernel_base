@@ -20,7 +20,7 @@ plugins {
 }
 
 dependencies {
-    runtimeOnly group: 'junit', name: 'junit', version: '4.12'
+    runtimeOnly group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 
