@@ -28,8 +28,8 @@ public interface WidgetInfo {
 
   String MODEL_MODULE_VALUE = "@jupyter-widgets/controls";
   String VIEW_MODULE_VALUE = "@jupyter-widgets/controls";
-  String MODEL_MODULE_VERSION_VALUE = "*";
-  String VIEW_MODULE_VERSION_VALUE = "*";
+  String MODEL_MODULE_VERSION_VALUE = "2.4.4";
+  String VIEW_MODULE_VERSION_VALUE = "2.4.4";
 
   String VALUE = "value";
   String DISABLED = "disabled";

@@ -22,9 +22,14 @@ import java.util.Map;
 
 public class StateRequestMsgCallbackHandler implements Handler<Message> {
   private ChangeAction action;
+  private MessageAction messageAction;
 
   public StateRequestMsgCallbackHandler(ChangeAction action) {
     this.action = action;
+  }
+
+  public StateRequestMsgCallbackHandler(MessageAction messageAction) {
+    this.messageAction = messageAction;
   }
 
   @Override
@@ -34,9 +39,17 @@ public class StateRequestMsgCallbackHandler implements Handler<Message> {
       if (data.containsKey("method")) {
         String method = (String) data.get("method");
         if (method.equals("request_state")) {
-          action.execute();
+          if (messageAction != null) {
+            messageAction.execute(message);
+          } else if (action != null) {
+            action.execute();
+          }
         }
       }
     }
+  }
+
+  public interface MessageAction {
+    void execute(Message message);
   }
 }

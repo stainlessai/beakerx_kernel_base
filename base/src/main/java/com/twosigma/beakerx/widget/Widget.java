@@ -37,11 +37,25 @@ public abstract class Widget implements CommFunctionality, DisplayableWidget, Wi
 
   public Widget(Comm comm) {
     this.comm = comm;
-    getComm().addMsgCallbackList(new StateRequestMsgCallbackHandler(this::stateRequestHandler));
+    getComm().addMsgCallbackList(new StateRequestMsgCallbackHandler(
+        (StateRequestMsgCallbackHandler.MessageAction) this::handleStateRequest));
   }
 
   public Widget() {
     this(BxComm.createComm());
+  }
+
+  private void handleStateRequest(Message parentMessage) {
+    HashMap<String, Object> state = createState();
+    java.util.List<ChangeItem> changes = new java.util.ArrayList<>();
+    for (java.util.Map.Entry<String, Object> entry : state.entrySet()) {
+      changes.add(new ChangeItem(entry.getKey(), entry.getValue()));
+    }
+    addStateRequestData(changes);
+    this.comm.sendUpdate(changes, parentMessage);
+  }
+
+  protected void addStateRequestData(java.util.List<ChangeItem> changes) {
   }
 
   public void stateRequestHandler() {

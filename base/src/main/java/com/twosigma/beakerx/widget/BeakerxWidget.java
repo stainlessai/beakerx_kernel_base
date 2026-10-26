@@ -77,6 +77,11 @@ public abstract class BeakerxWidget extends Widget implements BeakerxWidgetInfo 
     };
   }
 
+  @Override
+  protected void addStateRequestData(java.util.List<ChangeItem> changes) {
+    changes.addAll(doSendModel());
+  }
+
   protected void sendModelUpdate(Object item) {
     this.updateModel.update(asList(new ChangeItem(MODEL_UPDATE, serializeToJsonObject(item))));
   }

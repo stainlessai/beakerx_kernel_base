@@ -202,12 +202,6 @@ public class TableDisplay extends BeakerxWidget {
   }
 
   @Override
-  public void stateRequestHandler() {
-    super.stateRequestHandler();
-    sendModel();
-  }
-
-  @Override
   protected void openComm() {
     super.openComm();
     getComm().addMsgCallbackList((Handler<Message>) message -> displayActions.handleSetDetails(message));
